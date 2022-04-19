@@ -1,30 +1,27 @@
 require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 8080;
+const key = process.env.KEY;
+const secret = process.env.SECRET;
+
+const jsonParser = bodyParser.json();
 
 app.listen(port, ()=>{
     console.log('server running');
 })
 let petfinder = require("@petfinder/petfinder-js");
- client = new petfinder.Client({apiKey: "uWfFrqpZBBniSqxk33jTs44c0Wwp9GoZGvRM1RULbebp2v0B3M", secret: "9bmfcblM9bxMw52xz7WCrpdCjK3b8zA145Z6eH9r"});
+ client = new petfinder.Client({apiKey: key, secret: secret});
 
-
-
-
-client.animal.search();
-
-
-app.get("/", (req,res) => {
+app.get("/", jsonParser, (req, res) => {
+    console.log(req.body);
     client.animal.search(req.body)
      .then(function (response) {
-         
          res.type('application/json');
          res.json(response.data.animals);
-         console.log(JSON.parse(req.body));
-
      })
-     .catch(function (error) {
+     .catch(function (error) {https://bitbucket.gannon.xyz/scm/pp/perfectpet.git
          console.log(error);
      });
 })
