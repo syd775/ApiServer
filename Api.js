@@ -14,14 +14,14 @@ app.listen(port, ()=>{
 let petfinder = require("@petfinder/petfinder-js");
  client = new petfinder.Client({apiKey: key, secret: secret});
 
-app.get("/", jsonParser, (req, res) => {
+app.get("/pets", jsonParser, (req, res) => {
     console.log(req.body);
     client.animal.search(req.body)
      .then(function (response) {
          res.type('application/json');
          res.json(response.data.animals);
      })
-     .catch(function (error) {https://bitbucket.gannon.xyz/scm/pp/perfectpet.git
+     .catch(function (error) {
          console.log(error);
      });
 })
