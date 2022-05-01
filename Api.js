@@ -5,9 +5,9 @@ const app = express();
 const port = process.env.PORT || 8080;
 const key = process.env.KEY;
 const secret = process.env.SECRET;
-//update deployment
-const jsonParser = bodyParser.json();
 
+const jsonParser = bodyParser.json();
+//screaming internally
 app.listen(port, ()=>{
     console.log('server running');
 })
