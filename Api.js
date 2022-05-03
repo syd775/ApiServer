@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const URI = process.env.URI;
 
 //connect to db
-mongoose.connect('mongodb+srv://sydney95174:stellybean19@cluster0.fubcc.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect(URI);
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
