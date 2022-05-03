@@ -5,12 +5,28 @@ const app = express();
 const port = process.env.PORT || 8080;
 const key = process.env.KEY;
 const secret = process.env.SECRET;
-
 const jsonParser = bodyParser.json();
-//screaming internally
+const mongoose = require('mongoose');
+const URI = process.env.URI;
+
+//connect to db
+mongoose.connect('mongodb+srv://sydney95174:stellybean19@cluster0.fubcc.mongodb.net/test?retryWrites=true&w=majority');
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("DB Connection Established");
+});
+
+let users = db.collection('users');
+
+const userRouter = require('./userRoutes.js');
+app.use('/users', userRouter)
+
 app.listen(port, ()=>{
     console.log('server running');
-})
+});
+
+
 let petfinder = require("@petfinder/petfinder-js");
  client = new petfinder.Client({apiKey: key, secret: secret});
 
