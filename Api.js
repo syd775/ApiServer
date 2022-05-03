@@ -8,7 +8,9 @@ const secret = process.env.SECRET;
 const jsonParser = bodyParser.json();
 const mongoose = require('mongoose');
 const URI = process.env.URI;
-
+app.listen(port, ()=>{
+    console.log('server running');
+});
 //connect to db
 mongoose.connect(URI);
 let db = mongoose.connection;
@@ -21,10 +23,6 @@ let users = db.collection('users');
 
 const userRouter = require('./userRoutes.js');
 app.use('/users', userRouter)
-
-app.listen(port, ()=>{
-    console.log('server running');
-});
 
 
 let petfinder = require("@petfinder/petfinder-js");
