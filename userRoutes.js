@@ -40,7 +40,7 @@ router.post('/', jsonParser, async(req, res) => {
     }
 });
 
-router.patch('/:email/:likedpets', async(req, res)=>{
+router.patch('/:email/likedpets', async(req, res)=>{
     const email = req.params.email;
     const likedPets = req.params.likedPets;
     const newLikedPet = {
