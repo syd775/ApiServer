@@ -8,9 +8,11 @@ const secret = process.env.SECRET;
 const jsonParser = bodyParser.json();
 const mongoose = require('mongoose');
 const URI = process.env.URI;
-app.listen(port, ()=>{
+
+const server = app.listen(port, ()=>{
     console.log('server running');
 });
+
 //connect to db
 mongoose.connect(URI);
 let db = mongoose.connection;
@@ -18,8 +20,6 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
   console.log("DB Connection Established");
 });
-
-let users = db.collection('users');
 
 const userRouter = require('./userRoutes.js');
 app.use('/users', userRouter)
@@ -38,4 +38,6 @@ app.get("/pets", jsonParser, (req, res) => {
      .catch(function (error) {
          console.log(error);
      });
-})
+});
+
+module.exports = server;
